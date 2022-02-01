@@ -81,8 +81,6 @@ class MateriaController{
         }
     }
 
-
-
 }
 
 module.exports = MateriaController

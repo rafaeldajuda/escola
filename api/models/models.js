@@ -1,8 +1,8 @@
 const dbConnection = require('../database');
 
 class Models {
-     constructor(nomeModelo){
-        this.nomeModelo = nomeModelo;
+     constructor(nomeTabela){
+        this.nomeTabela = nomeTabela;
         this.db = null;
     }
 
@@ -14,21 +14,21 @@ class Models {
     }
 
     async getAll() {
-        let sql = `SELECT * FROM ${this.nomeModelo}`;
+        let sql = `SELECT * FROM ${this.nomeTabela}`;
         const [rows, fields] = await this.db.execute(sql);
 
         return rows;
     }
 
     async getOne(id) {
-        let sql = `SELECT * FROM ${this.nomeModelo} WHERE id = ${id}`;
+        let sql = `SELECT * FROM ${this.nomeTabela} WHERE id = ${id}`;
         const [rows, fields] = await this.db.execute(sql);
 
         return rows;
     }
 
     async delete(id) {
-        let sql = `DELETE FROM ${this.nomeModelo} WHERE id = ${id}`;
+        let sql = `DELETE FROM ${this.nomeTabela} WHERE id = ${id}`;
         const [rows, fields] = await this.db.execute(sql);
 
         return rows;

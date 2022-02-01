@@ -1,8 +1,8 @@
-const Models = require('../models');
+const Models = require('../../models/models');
 
-class MateriaModel extends Models {
-    constructor() {
-        super('materia');
+class TipoPessoaModel extends Models {
+    constructor(){
+        super('tipo_pessoa');
     }
 
     async create(listaDeCampos) {
@@ -12,7 +12,7 @@ class MateriaModel extends Models {
 
         const [rows, fields] = await this.db.execute(sql, listaDeCampos);
         return rows;
-    }   
+    }
 
     async update(listaDeCampos) {
         let sql = `UPDATE ${this.nomeTabela} SET 
@@ -26,4 +26,4 @@ class MateriaModel extends Models {
     }
 }
 
-module.exports = MateriaModel;
+module.exports = TipoPessoaModel;
