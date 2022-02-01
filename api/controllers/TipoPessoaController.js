@@ -8,6 +8,8 @@ class TipoPessoaController{
             await tipoPessoaModel.connectDatabase();
 
             const todosOsTipos = await tipoPessoaModel.getAll();
+            tipoPessoaModel.db.end();
+
             return res.status(200).json(todosOsTipos);
         }
         catch(err){
@@ -23,6 +25,8 @@ class TipoPessoaController{
             await tipoPessoaModel.connectDatabase();
 
             const tipos = await tipoPessoaModel.getOne(parseInt(idTipo));
+            tipoPessoaModel.db.end();
+
             if(tipos.length == 0) {
                 return res.status(404).end();
             }
@@ -40,8 +44,9 @@ class TipoPessoaController{
             const tipoPessoaModel = new TipoPessoaModel();
             await tipoPessoaModel.connectDatabase();
            
-            const novoTipo = await tipoPessoaModel.create([tipo.descricao])
+            const novoTipo = await tipoPessoaModel.create([tipo.descricao]);
             const idTipo = novoTipo.insertId;
+            tipoPessoaModel.db.end();
 
             return res.status(201).json({ id: idTipo });
         }catch(err) {
@@ -58,6 +63,7 @@ class TipoPessoaController{
             await tipoPessoaModel.connectDatabase();
 
             await tipoPessoaModel.update([tipo.descricao, idTipo]);
+            tipoPessoaModel.db.end();
            
             return res.status(204).end();
         }catch(err) {
@@ -73,6 +79,7 @@ class TipoPessoaController{
             await tipoPessoaModel.connectDatabase();
 
             await tipoPessoaModel.delete(idTipo);
+            tipoPessoaModel.db.end();
            
             return res.status(204).end();
         }catch(err) {

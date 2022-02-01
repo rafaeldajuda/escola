@@ -8,6 +8,8 @@ class MateriaController{
             await materiaModel.connectDatabase();
 
             const todasAsMaterias = await materiaModel.getAll();
+            materiaModel.db.end();
+
             return res.status(200).json(todasAsMaterias);
         }
         catch(err){
@@ -23,6 +25,8 @@ class MateriaController{
             await materiaModel.connectDatabase();
 
             const materias = await materiaModel.getOne(parseInt(idMateria));
+            materiaModel.db.end();
+
             if(materias.length == 0) {
                 return res.status(404).end();
             }
@@ -40,8 +44,9 @@ class MateriaController{
             const materiaModel = new MateriaModel();
             await materiaModel.connectDatabase();
            
-            const novaMateria = await materiaModel.create([materia.descricao])
+            const novaMateria = await materiaModel.create([materia.descricao]);
             const idMateria = novaMateria.insertId;
+            materiaModel.db.end();
 
             return res.status(201).json({ id: idMateria });
         }catch(err) {
@@ -58,6 +63,7 @@ class MateriaController{
             await materiaModel.connectDatabase();
 
             await materiaModel.update([materia.descricao, idMateria]);
+            materiaModel.db.end();
            
             return res.status(204).end();
         }catch(err) {
@@ -73,6 +79,7 @@ class MateriaController{
             await materiaModel.connectDatabase();
 
             await materiaModel.delete(idMateria);
+            materiaModel.db.end();
            
             return res.status(204).end();
         }catch(err) {
