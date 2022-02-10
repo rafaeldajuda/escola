@@ -1,5 +1,6 @@
 const tbMateria = require('./tbMateria');
 const tbTipoPessoa = require('./tbTipoPessoa');
+const tbPessoa = require('./tbPessoa');
 const dbConnection = require('../../database');
 
 async function createTables() {
@@ -11,6 +12,7 @@ async function createTables() {
 
         await tbMateria(db);
         await tbTipoPessoa(db);
+        await tbPessoa(db);
         console.log('todas as tabelas criadas');
         db.end();
 
